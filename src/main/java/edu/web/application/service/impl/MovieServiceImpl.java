@@ -4,10 +4,13 @@ import edu.web.application.api.dto.MovieDto;
 import edu.web.application.api.mapper.MovieMapper;
 import edu.web.application.exception.ProjectException;
 import edu.web.application.model.Movie;
+import edu.web.application.model.specification.MovieSpecification;
 import edu.web.application.repository.MovieRepository;
 import edu.web.application.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Log4j2
@@ -44,5 +47,10 @@ public class MovieServiceImpl implements MovieService {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new ProjectException("Фильм не найден."));
         movieRepository.delete(movie);
+    }
+
+    @Override
+    public Page<MovieDto> get(MovieSpecification specification, Pageable pageable) {
+        return movieRepository.findAll(specification, pageable).map(movieMapper::from);
     }
 }

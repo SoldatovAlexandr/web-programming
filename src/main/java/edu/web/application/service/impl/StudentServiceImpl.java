@@ -4,10 +4,13 @@ import edu.web.application.api.dto.StudentDto;
 import edu.web.application.api.mapper.StudentMapper;
 import edu.web.application.exception.ProjectException;
 import edu.web.application.model.Student;
+import edu.web.application.model.specification.StudentSpecification;
 import edu.web.application.repository.StudentRepository;
 import edu.web.application.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,5 +50,10 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findById(id)
                 .orElseThrow(() -> new ProjectException("Пользователь не найден."));
         studentRepository.delete(student);
+    }
+
+    @Override
+    public Page<StudentDto> get(StudentSpecification specification, Pageable pageable) {
+        return studentRepository.findAll(specification, pageable).map(studentMapper::from);
     }
 }
