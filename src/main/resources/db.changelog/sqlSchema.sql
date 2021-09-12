@@ -22,3 +22,13 @@ create table if not exists student
 );
 --rollback drop table student;
 --comment: Создана таблица student
+
+--changeset asoldatov:movie1
+create table if not exists movie
+(
+    id     int8 default nextval('hibernate_sequence'::regclass) not null primary key unique,
+    name   varchar(64)                                          not null unique,
+    author varchar(64)                                          not null
+);
+--rollback drop table movie;
+--comment: Создана таблица movie

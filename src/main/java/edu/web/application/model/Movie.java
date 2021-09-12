@@ -4,6 +4,12 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/*
+ * Класс сущности
+ * 2 ЛР 22 вариант
+ * Солдатов А.Н. ПИН-181
+ */
+
 @Getter
 @Setter
 @Builder
@@ -13,9 +19,8 @@ import javax.persistence.*;
 @ToString
 
 @Entity
-@Table(name = "student")
-public class Student {
-
+@Table(name = "movie")
+public class Movie {
     @Id
     @GeneratedValue(generator = "h_sequence")
     @SequenceGenerator(name = "h_sequence", sequenceName = "hibernate_sequence", allocationSize = 1)
@@ -24,15 +29,6 @@ public class Student {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "card_number")
-    private String cardNumber;
-
-    @Column(name = "group_name")
-    private String groupName;
-
-    @Column(name = "subgroup")
-    private Integer subgroup;
+    @Column(name = "author")
+    private String author;
 }
