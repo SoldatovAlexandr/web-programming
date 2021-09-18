@@ -32,3 +32,15 @@ create table if not exists movie
 );
 --rollback drop table movie;
 --comment: Создана таблица movie
+
+--changeset akorzh:hotel1
+create table if not exists hotel
+(
+    id     int8 default nextval('hibernate_sequence'::regclass) not null primary key unique,
+    name   varchar(64)                                          not null unique,
+    count_visitor bigint                                          not null,
+    director_name varchar(64)                                          not null,
+    address varchar(64)                                          not null
+    );
+--rollback drop table hotel;
+--comment: Создана таблица hotel
