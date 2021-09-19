@@ -44,3 +44,33 @@ create table if not exists hotel
     );
 --rollback drop table hotel;
 --comment: Создана таблица hotel
+
+--changeset akorzh:users1
+create table if not exists users
+(
+    id     int8 default nextval('hibernate_sequence'::regclass) not null primary key unique,
+    login   varchar(64)                                          not null unique,
+    password varchar(256)                                            not null
+);
+--rollback drop table users;
+--comment: Создана таблица users
+
+--changeset akorzh:roles1
+create table if not exists roles
+(
+    id     int8 default nextval('hibernate_sequence'::regclass) not null primary key unique,
+    name   varchar(64)                                          not null unique
+);
+--rollback drop table roles;
+--comment: Создана таблица roles
+
+--changeset akorzh:user_roles1
+create table if not exists user_roles
+(
+    user_id     int8 not null constraint fk_users references users(id),
+    role_id     int8 not null constraint fk_roles references roles(id)
+);
+--rollback drop table user_roles;
+--comment: Создана таблица user_roles
+
+

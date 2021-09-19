@@ -1,6 +1,8 @@
 package edu.web.application.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.*;
 
@@ -9,6 +11,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StudentDto {
 
     private Long id;
@@ -18,7 +21,8 @@ public class StudentDto {
     @Size(max = 64, message = "required.value.error")
     private String name;
 
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "required.value.error")
+//    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "required.value.error")
+    @Email(message =  "required.value.error")
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
     private String email;

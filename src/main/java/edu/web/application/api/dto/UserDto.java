@@ -1,11 +1,14 @@
 package edu.web.application.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Builder
 @Getter
@@ -13,17 +16,19 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MovieDto {
-
+public class UserDto {
     private Long id;
 
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9 -]*$", message = "required.value.error")
+//    @Pattern(regexp = "^[a-zA-Zа-яА-Я ]*$", message = "required.value.error")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
-    private String name;
+    private String password;
 
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я ]*$", message = "required.value.error")
+    @Email(message =  "required.value.error")
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
-    private String author;
+    private String login;
+
+    private List<RoleDto> roles;
 }
