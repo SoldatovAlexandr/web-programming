@@ -12,3 +12,5 @@ spring:
     enabled: true
     change-log: classpath:db.changelog-master.xml
     drop-first: false
+frontend:
+  host: "${FRONTEND_URL}"

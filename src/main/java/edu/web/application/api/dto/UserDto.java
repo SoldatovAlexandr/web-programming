@@ -17,6 +17,7 @@ import java.util.List;
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
 
 //    @Pattern(regexp = "^[a-zA-Zа-яА-Я ]*$", message = "required.value.error")

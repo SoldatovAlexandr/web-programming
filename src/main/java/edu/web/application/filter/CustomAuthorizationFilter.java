@@ -9,7 +9,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -29,18 +28,19 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @Log4j2
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
-    private final String HEADER_BEGINNING = "YouShallNotPass "; // TODO: 18.09.2021 move to properties
+    private final String tokenName = "Bearer";
+    private final String secretKey = "secret";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (request.getServletPath().equals("/api/login")) {
+        if (request.getServletPath().equals("/api/login") || request.getServletPath().equals("/auth/")) {
             filterChain.doFilter(request, response);
         } else {
             String authorizationHeader = request.getHeader(AUTHORIZATION);
-            if (authorizationHeader != null && authorizationHeader.startsWith(HEADER_BEGINNING)) {
+            if (authorizationHeader != null && authorizationHeader.startsWith(tokenName)) {
                 try {
-                    String token = authorizationHeader.substring(HEADER_BEGINNING.length());
-                    Algorithm algorithm = Algorithm.HMAC256("secret".getBytes()); // TODO: 18.09.2021 move secret to properties
+                    String token = authorizationHeader.substring(tokenName.length());
+                    Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
                     JWTVerifier verifier = JWT.require(algorithm).build();
                     DecodedJWT decodedJWT = verifier.verify(token);
                     String login = decodedJWT.getSubject();
