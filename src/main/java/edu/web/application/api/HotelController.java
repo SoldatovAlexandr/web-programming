@@ -33,7 +33,7 @@ public class HotelController {
     }
 
     @PutMapping("/{id}")
-    public HotelDto update(@PathVariable("id") Long id, @Valid @RequestBody HotelDto HotelDto) {
+    public HotelDto update(@PathVariable("id") Long id, @Valid @RequestBody HotelDto HotelDto) throws ProjectException {
         log.info("Update hotel with request [{}]", HotelDto);
         return hotelService.update(id, HotelDto);
     }

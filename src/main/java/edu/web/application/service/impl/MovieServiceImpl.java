@@ -3,6 +3,7 @@ package edu.web.application.service.impl;
 import edu.web.application.api.dto.MovieDto;
 import edu.web.application.api.mapper.MovieMapper;
 import edu.web.application.exception.ProjectException;
+import edu.web.application.model.Hotel;
 import edu.web.application.model.Movie;
 import edu.web.application.model.specification.MovieSpecification;
 import edu.web.application.repository.MovieRepository;
@@ -36,8 +37,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieDto update(Long id, MovieDto movieDto) {
-        Movie movie = movieMapper.to(movieDto);
+    public MovieDto update(Long id, MovieDto movieDto) throws ProjectException {
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new ProjectException("Фильм не найден."));
+        movie.setAuthor(movieDto.getAuthor());
+        movie.setName(movieDto.getName());
         movieRepository.save(movie);
         return movieMapper.from(movie);
     }

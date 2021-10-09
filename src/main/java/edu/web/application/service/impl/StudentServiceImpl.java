@@ -3,6 +3,7 @@ package edu.web.application.service.impl;
 import edu.web.application.api.dto.StudentDto;
 import edu.web.application.api.mapper.StudentMapper;
 import edu.web.application.exception.ProjectException;
+import edu.web.application.model.Hotel;
 import edu.web.application.model.Student;
 import edu.web.application.model.specification.StudentSpecification;
 import edu.web.application.repository.StudentRepository;
@@ -38,8 +39,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional
     @Override
-    public StudentDto update(Long id, StudentDto studentDto) {
-        Student student = studentMapper.to(studentDto);
+    public StudentDto update(Long id, StudentDto studentDto) throws ProjectException {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new ProjectException("Студент не найден."));
+        student.setName(studentDto.getName());
+        student.setCardNumber(studentDto.getCardNumber());
+        student.setEmail(studentDto.getEmail());
+        student.setSubgroup(studentDto.getSubgroup());
+        student.setGroupName(studentDto.getGroupName());
         studentRepository.save(student);
         return studentMapper.from(student);
     }

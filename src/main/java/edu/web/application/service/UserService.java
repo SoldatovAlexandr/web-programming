@@ -13,7 +13,7 @@ public interface UserService {
 
     UserDto add(UserDto UserDto) throws ProjectException;
 
-    UserDto update(Long id, UserDto UserDto);
+    UserDto update(Long id, UserDto UserDto) throws ProjectException;
 
     void delete(Long id) throws ProjectException;
 

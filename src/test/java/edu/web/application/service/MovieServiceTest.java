@@ -68,7 +68,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    void update_success() {
+    void update_success() throws ProjectException {
         when(repository.findById(1L)).thenReturn(Optional.of(movie));
         when(repository.save(movie)).thenReturn(movie);
 

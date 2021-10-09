@@ -12,7 +12,7 @@ public interface HotelService {
 
     HotelDto add(HotelDto HotelDto);
 
-    HotelDto update(Long id, HotelDto HotelDto);
+    HotelDto update(Long id, HotelDto HotelDto) throws ProjectException;
 
     void delete(Long id) throws ProjectException;
 

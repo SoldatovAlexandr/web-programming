@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserDto update(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
+    public UserDto update(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) throws ProjectException {
         log.info("Update student with request [{}]", userDto);
         return userService.update(id, userDto);
     }
