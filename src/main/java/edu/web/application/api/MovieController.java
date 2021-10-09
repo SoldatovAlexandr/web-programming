@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     private final MovieService movieService;

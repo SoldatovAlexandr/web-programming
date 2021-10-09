@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/api/students")
 public class StudentController {
 
     private final StudentService studentService;

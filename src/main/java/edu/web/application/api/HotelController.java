@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hotel")
+@RequestMapping("/api/hotel")
 public class HotelController {
 
     private final HotelService hotelService;
