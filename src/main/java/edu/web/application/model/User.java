@@ -18,9 +18,6 @@ public class User {
     @SequenceGenerator(name = "h_sequence", sequenceName = "hibernate_sequence", allocationSize = 1)
     private Long id;
 
-//    @Column(name = "name")
-//    private String name;
-
     @Column(name = "login", unique = true)
     private String login;
 
@@ -34,5 +31,4 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> roles;
-//    private String token;
 }
