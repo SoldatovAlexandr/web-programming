@@ -12,7 +12,7 @@ public interface StudentService {
 
     StudentDto add(StudentDto studentDto);
 
-    StudentDto update(Long id, StudentDto studentDto);
+    StudentDto update(Long id, StudentDto studentDto) throws ProjectException;
 
     void delete(Long id) throws ProjectException;
 

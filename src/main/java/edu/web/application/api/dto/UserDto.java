@@ -20,7 +20,6 @@ public class UserDto {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
 
-//    @Pattern(regexp = "^[a-zA-Zа-яА-Я ]*$", message = "required.value.error")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")

@@ -8,12 +8,11 @@ import org.springframework.data.domain.Pageable;
 
 public interface UserService {
 
-
     UserDto get(Long id) throws ProjectException;
 
     UserDto add(UserDto UserDto) throws ProjectException;
 
-    UserDto update(Long id, UserDto UserDto);
+    UserDto update(Long id, UserDto UserDto) throws ProjectException;
 
     void delete(Long id) throws ProjectException;
 

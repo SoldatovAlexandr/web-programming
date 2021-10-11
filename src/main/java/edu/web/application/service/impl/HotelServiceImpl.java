@@ -25,23 +25,28 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public HotelDto get(Long id) throws ProjectException {
-        Hotel Hotel = hotelRepository.findById(id)
+        Hotel hotel = hotelRepository.findById(id)
                 .orElseThrow(() -> new ProjectException("Отель не найден."));
-        return hotelMapper.from(Hotel);
+        return hotelMapper.from(hotel);
     }
 
     @Override
     public HotelDto add(HotelDto HotelDto) {
-        Hotel Hotel = hotelMapper.to(HotelDto);
-        hotelRepository.save(Hotel);
-        return hotelMapper.from(Hotel);
+        Hotel hotel = hotelMapper.to(HotelDto);
+        hotelRepository.save(hotel);
+        return hotelMapper.from(hotel);
     }
 
     @Override
-    public HotelDto update(Long id, HotelDto HotelDto) {
-        Hotel Hotel = hotelMapper.to(HotelDto);
-        hotelRepository.save(Hotel);
-        return hotelMapper.from(Hotel);
+    public HotelDto update(Long id, HotelDto hotelDto) throws ProjectException {
+        Hotel hotel = hotelRepository.findById(id)
+                .orElseThrow(() -> new ProjectException("Отель не найден."));
+        hotel.setAddress(hotelDto.getAddress());
+        hotel.setCountVisitor(hotelDto.getCountVisitor());
+        hotel.setName(hotelDto.getName());
+        hotel.setDirectorName(hotelDto.getDirectorName());
+        hotelRepository.save(hotel);
+        return hotelMapper.from(hotel);
     }
 
     @Override

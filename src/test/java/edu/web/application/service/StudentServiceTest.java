@@ -73,7 +73,7 @@ public class StudentServiceTest {
     }
 
     @Test
-    void update_success() {
+    void update_success() throws ProjectException {
         when(repository.findById(1L)).thenReturn(Optional.of(student));
         when(repository.save(student)).thenReturn(student);
 

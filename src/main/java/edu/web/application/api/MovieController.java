@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     private final MovieService movieService;
@@ -35,7 +35,7 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public MovieDto update(@PathVariable("id") Long id, @Valid @RequestBody MovieDto movieDto) {
+    public MovieDto update(@PathVariable("id") Long id, @Valid @RequestBody MovieDto movieDto) throws ProjectException {
         log.info("Update movie with request [{}]", movieDto);
         return movieService.update(id, movieDto);
     }

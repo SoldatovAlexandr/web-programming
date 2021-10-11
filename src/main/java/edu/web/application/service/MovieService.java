@@ -11,7 +11,7 @@ public interface MovieService {
 
     MovieDto add(MovieDto movieDto);
 
-    MovieDto update(Long id, MovieDto movieDto);
+    MovieDto update(Long id, MovieDto movieDto) throws ProjectException;
 
     void delete(Long id) throws ProjectException;
 

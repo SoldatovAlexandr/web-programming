@@ -4,6 +4,7 @@ import edu.web.application.api.dto.UserDto;
 import edu.web.application.api.mapper.UserMapper;
 import edu.web.application.common.UserRoles;
 import edu.web.application.exception.ProjectException;
+import edu.web.application.model.Movie;
 import edu.web.application.model.User;
 import edu.web.application.model.specification.UserSpecification;
 import edu.web.application.repository.RoleRepository;
@@ -66,8 +67,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public UserDto update(Long id, UserDto UserDto) {
-        User user = userMapper.to(UserDto);
+    public UserDto update(Long id, UserDto userDto) throws ProjectException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ProjectException("Пользователь не найден."));
+        user.setLogin(userDto.getLogin());
+        user.setPassword(userDto.getPassword());
         userRepository.save(user);
         return userMapper.from(user);
     }

@@ -21,13 +21,12 @@ public class StudentDto {
     @Size(max = 64, message = "required.value.error")
     private String name;
 
-//    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", message = "required.value.error")
     @Email(message =  "required.value.error")
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
     private String email;
 
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9]*$", message = "required.value.error")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9-]*$", message = "required.value.error")
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
     private String cardNumber;

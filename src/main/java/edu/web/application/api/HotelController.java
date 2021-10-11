@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/hotel")
+@RequestMapping("/api/hotel")
 public class HotelController {
 
     private final HotelService hotelService;
@@ -33,7 +33,7 @@ public class HotelController {
     }
 
     @PutMapping("/{id}")
-    public HotelDto update(@PathVariable("id") Long id, @Valid @RequestBody HotelDto HotelDto) {
+    public HotelDto update(@PathVariable("id") Long id, @Valid @RequestBody HotelDto HotelDto) throws ProjectException {
         log.info("Update hotel with request [{}]", HotelDto);
         return hotelService.update(id, HotelDto);
     }

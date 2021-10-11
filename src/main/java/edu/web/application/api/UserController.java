@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserService userService;
 
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserDto update(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) {
+    public UserDto update(@PathVariable("id") Long id, @Valid @RequestBody UserDto userDto) throws ProjectException {
         log.info("Update student with request [{}]", userDto);
         return userService.update(id, userDto);
     }
