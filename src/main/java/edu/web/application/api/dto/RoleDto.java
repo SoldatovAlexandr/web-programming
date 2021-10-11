@@ -13,17 +13,11 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @EqualsAndHashCode
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MovieDto {
-
+public class RoleDto {
     private Long id;
 
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9 -]*$", message = "required.value.error")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я0-9 -_]*$", message = "required.value.error")
     @NotBlank(message = "required.value.error")
     @Size(max = 64, message = "required.value.error")
     private String name;
-
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я ]*$", message = "required.value.error")
-    @NotBlank(message = "required.value.error")
-    @Size(max = 64, message = "required.value.error")
-    private String author;
 }
